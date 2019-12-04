@@ -22,6 +22,7 @@ function showWeatherAtPosition(position) {
     console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
 
     if(latitude !== undefined && longitude !== undefined) {
+        //calling openweather API to get the current weather by providing the latitude and longitude coordinates of the user
         $.ajax({
             url: queryUrl + "lat=" + latitude + "&lon=" + longitude + apikey,
             method: "GET"
@@ -30,4 +31,15 @@ function showWeatherAtPosition(position) {
         });
     }
 }
+
+$("#search").on("click", function(event) {
+    event.preventDefault();
+    //calling openweather API to get the current weather by providing the city name entered in the search field
+    $.ajax({
+        url: queryUrl + "q=" + $("#cityName").val() + apikey,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+    });
+})
 
