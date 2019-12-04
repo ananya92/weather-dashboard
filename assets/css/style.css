@@ -39,4 +39,9 @@ body, html {
     padding: 10px;
     background-color: white;
     background-blend-mode: screen;
+    display: none;
+}
+
+#temperature {
+    margin-top: 10px;
 }
