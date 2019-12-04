@@ -57,6 +57,15 @@ function showWeatherAtPosition(position) {
             var speedMPH = (parseInt(response.wind.speed) * 2.23694);      
             windTag.text(windTag.text() + speedMPH.toFixed(2) + " MPH");
         });
+        //Getting ultraviolet Index at current location by calling openweather API
+        $.ajax({
+            url: queryUrlUVIndex + "lat=" + latitude + "&lon=" + longitude + apikey,
+            method: "GET"
+        }).then(function(response) {
+            var uvTag = $("#uvIndex");
+            uvTag.text(response.value);
+            uvTag.attr("style", "color: white; background-color: #ff1a1a; padding: 5px; border-radius: 5px;")
+        });
     }
 }
 
