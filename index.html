@@ -8,11 +8,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="icon" type="image/png" href="assets/images/weather-icon.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body onload="getLocation()">
         <header class="jumbotron text-center">
             <h1 class="display-6">Weather Dashboard</h1>
         </header>
+        <form>
+            <h5>Search for a city:</h5>
+            <input type="text" id="cityName" required>
+            <button id="search" type="submit"><i class="fa fa-search"></i></button>
+        </form>
         <script src="assets/js/script.js"></script>
     </body>
 </html>
