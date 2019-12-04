@@ -1,5 +1,5 @@
 .jumbotron {
-    padding: 20px 0;
+    padding: 15px 0;
     background-blend-mode: screen;
     margin: 10px;
     border-radius: 0;
@@ -41,7 +41,7 @@ body, html {
     background-blend-mode: screen;
     display: none;
 }
-
-#temperature {
-    margin-top: 10px;
+ #humidity, #wSpeed, #uvIndex {
+    margin-top: 15px;
+    display: inline-block;
 }
