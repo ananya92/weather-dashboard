@@ -1,25 +1,42 @@
 .jumbotron {
     padding: 20px 0;
     background-blend-mode: screen;
+    margin: 10px;
+    border-radius: 0;
 }
 
 #search {
-    padding: 10px;
     background: #2196F3;
     color: white;
-    font-size: 17px;
     border: 1px solid grey;
-    border-left: none; /* Prevent double borders */
     cursor: pointer;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 10px royalblue;
+    box-shadow: 0 0 10px royalblue;
+    float: left;
 }
 
 button:hover {
     background: #0b7dda;
 }
 
+button:active {
+    transform: translateY(1px);
+}
 #cityName {
-    background: #f1f1f1;
-    padding: 10px;
-    font-size: 17px;
     border: 1px solid grey;
+    width: 150px;
+    float: left;
+}
+
+body, html {
+    margin: 0px;
+    max-height: 100%;
+}
+
+#currentWeather {
+    border: 1px solid #f1f1f1;
+    padding: 10px;
+    background-color: white;
+    background-blend-mode: screen;
 }

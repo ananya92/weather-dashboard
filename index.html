@@ -14,11 +14,29 @@
         <header class="jumbotron text-center">
             <h1 class="display-6">Weather Dashboard</h1>
         </header>
-        <form>
-            <h5>Search for a city:</h5>
-            <input type="text" id="cityName" required>
-            <button id="search" type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-3" style="background-color: #f8f5f5">
+                    <p>Search for a city:</p>
+                    <form>
+                        <input type="text" id="cityName" required>
+                        <button id="search" type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                    <div id="cityHistory"></div>
+                </div>                
+                <div class="col-sm-12 col-md-8 col-lg-9">
+                    <div id="currentWeather">
+                        <span id="name"></span>
+                        <span id="date"></span>
+                        <span id="weatherIcon"></span>
+                        <p id="temperature">Temperature: </p>
+                        <p id="humidity">Humidity: </p>
+                        <p id="wSpeed">Wind speed: </p>
+                        <span>UV Index: </span><span id="uvIndex"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="assets/js/script.js"></script>
     </body>
 </html>
