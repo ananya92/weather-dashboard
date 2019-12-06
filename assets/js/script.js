@@ -8,6 +8,9 @@ var queryUrl = "https://api.openweathermap.org/data/2.5/weather?";
 var queryUrlUVIndex = "https://api.openweathermap.org/data/2.5/uvi?";
 
 function getLocation() {
+    //Function to fill the previously searched cities in history tab
+    fillSearchHistory();
+    //Get the current location coordinates from Geolocation API
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showWeatherAtPosition);
     } 
@@ -30,6 +33,14 @@ function showWeatherAtPosition(position) {
         }).then(function(response) {
             fillCurrentWeatherDetails(response);
         });
+        var url = "https://api.openweathermap.org/data/2.5/forecast?";
+        $.ajax({
+            url: url + "lat=" + latitude + "&lon=" + longitude + apikey,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+        });
+        
         //Getting ultraviolet Index at current location by calling openweather API
         $.ajax({
             url: queryUrlUVIndex + "lat=" + latitude + "&lon=" + longitude + apikey,
@@ -64,7 +75,39 @@ $("#search").on("click", function(event) {
     });
     
 })
+function addCityToSearchHistory() {
+    //Reading the list of searched cities from local storage
+    var cityList = JSON.parse(localStorage.getItem("cities")); 
+    //Saving the searched item in the history div
+    var searchedCity = $("#name").text();
+    var button = $("<button>");
+    button.text(searchedCity);
+    button.attr("class", "button");
 
+    if(cityList === null) {
+        cityList = [];
+        cityList.push(searchedCity);
+        $("#cityHistory").append(button);
+    }
+    else { 
+        //Ensuring that city name is not already in cityList
+        if(cityList.indexOf(searchedCity) < 0) {  
+            //Maintaining only 5 cities in the history. If already 5 cities exist then prepending the new city and removing the oldest city
+            if(cityList.length >= 5) {
+                cityList.unshift(searchedCity);
+                cityList = cityList.slice(0, 5);
+            }
+            else {
+                cityList.push(searchedCity);
+            }
+            $("#cityHistory").append(button);
+        }
+    }
+    //Writing back the newly added city to local storage
+    localStorage.setItem("cities", JSON.stringify(cityList));
+    fillSearchHistory();
+}
+        
 function fillCurrentWeatherDetails(response) {
     var currentTime = moment().format('l');
     //Variable storing the weather icon link
@@ -95,8 +138,24 @@ function fillCurrentWeatherDetails(response) {
     //Converting speed from meter per second to miles per hour
     var speedMPH = (parseInt(response.wind.speed) * 2.23694);      
     windTag.text(speedMPH.toFixed(2) + " MPH");
+    //Fill the previously searched history
+    addCityToSearchHistory();
 }
-
+function fillSearchHistory() {
+    //read the list of searched cities from local storage and populate in the search div
+    var cityList = JSON.parse(localStorage.getItem("cities"));
+    //Remove the previously added cities so as to refresh the search history
+    $("#cityHistory").empty();
+    if(cityList !== null) {
+        // Create and add new buttons for each city read from the search history
+        for(var i=0; i<cityList.length; i++) {
+            var button = $("<button>");
+            button.text(cityList[i]);
+            button.attr("class", "button");
+            $("#cityHistory").append(button);
+        }
+    }
+}
 function fillUVIValue(response) {
     var uvTag = $("#uvIndex");
     uvTag.text(response.value);
