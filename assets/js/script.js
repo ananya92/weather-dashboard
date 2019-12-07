@@ -125,7 +125,7 @@ function addCityToSearchHistory() {
 }
         
 function fillCurrentWeatherDetails(response) {
-    var currentTime = moment().format('l');
+    var dateString = moment.unix(response.dt).format("MM/DD/YYYY");
     //Variable storing the weather icon link
     var iconurl = "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
     $("#currentWeather").attr("style", "display: block;");
@@ -138,7 +138,7 @@ function fillCurrentWeatherDetails(response) {
     var windTag = $("#wSpeed");
     nameTag.text(response.name);
     nameTag.attr("style", "font-size: 22px; font-weight: bold;");
-    dateTag.text("(" + currentTime + ")");
+    dateTag.text("(" + dateString + ")");
     dateTag.attr("style", "font-size: 22px; font-weight: bold;");
     iconTag.attr("src", iconurl);
     iconTag.attr("height", "60px");
@@ -191,12 +191,11 @@ function fillForecastDetails(response) {
             meanTimeWeatherList.push(response.list[i]);
         }
     }
-    //If the first instance at 12PM weather is of today then removing it from list since we want to display the future forecast of next 5 days which shouldn't include current day
-    if((meanTimeWeatherList[0].dt_txt.split())[0] === today) {
-        meanTimeWeatherList.shift();
-        //The current day's 12PM instance was returned which means that the 5th day's 12PM forecast doesn't exist. Hence, adding the last noted weather of the 5th day to the list since we have to provide 5th day's forecast
-        meanTimeWeatherList.push(response.list[length - 1]);
-    }
+    //The first instance at 12PM weather is of today hence it from list since we want to display the future forecast of next 5 days which shouldn't include current day
+    meanTimeWeatherList.shift();
+    //The 5th day's 12PM forecast doesn't exist. Hence, adding the last noted weather of the 5th day to the list since we have to provide 5th day's forecast
+    meanTimeWeatherList.push(response.list[response.list.length - 1]);
+
     var forecastList = document.querySelectorAll(".forecast");
     $("h4").attr("style", "display:block;");
     for(var i=0; i<meanTimeWeatherList.length; i++) {
@@ -209,7 +208,9 @@ function fillForecastDetails(response) {
                 var iconTag = document.createElement('img');
                 var tempTag = document.createElement('p');
                 var humidTag = document.createElement('p');
-                dateTag.innerHTML = (meanTimeWeatherList[i].dt_txt.split(" "))[0];
+                //Converting the unix timestamp of the forecast record to date
+                var dateString = moment.unix(meanTimeWeatherList[i].dt).format("MM/DD/YYYY");
+                dateTag.innerHTML = dateString;
                 dateTag.setAttribute("style", "font-size: 20px; font-weight: bold;");
                 var iconurl = "http://openweathermap.org/img/w/" + meanTimeWeatherList[i].weather[0].icon + ".png";
                 iconTag.setAttribute("src", iconurl);
