@@ -13,7 +13,8 @@
     border-radius: 5px;
     -webkit-box-shadow: 0 0 10px royalblue;
     box-shadow: 0 0 10px royalblue;
-    float: left;
+    height: 28px;
+    padding: 0px;
 }
 
 button:hover {
@@ -25,8 +26,6 @@ button:active {
 }
 #cityName {
     border: 1px solid grey;
-    width: 150px;
-    float: left;
     margin: 0 0 10px 0;
 }
 
@@ -84,4 +83,6 @@ button{
 
 h4 {
     display: none;
+    font-size: 22px;
+    font-weight: bold;
 }
