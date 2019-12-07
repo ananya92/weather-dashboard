@@ -57,7 +57,7 @@ button{
 }
 
 #cityHistory {
-    padding: 0px;
+    padding: 10px 0;
 }
 
 @media screen and (max-width: 767px){ 
