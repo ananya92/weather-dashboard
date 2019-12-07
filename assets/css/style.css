@@ -60,12 +60,6 @@ button{
     padding: 10px 0;
 }
 
-@media screen and (max-width: 767px){ 
-    #cityName {
-        width: 120px;
-    }
-}
-
 .container {
     height: 100%;
 }
@@ -84,3 +78,14 @@ h4 {
     font-size: 22px;
     font-weight: bold;
 }
+
+@media screen and (max-width: 767px){ 
+    #cityName {
+        width: 120px;
+    }
+}
+ @media screen and (max-width: 575px){
+     #historyDiv {
+        margin-bottom: 20px;
+     }
+ }
