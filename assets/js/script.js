@@ -41,7 +41,6 @@ function showWeatherAtPosition(position) {
             url: url + "lat=" + latitude + "&lon=" + longitude + units + apikey,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
             fillForecastDetails(response);
         });
         
@@ -87,7 +86,6 @@ function fetchWeatherAtCity(cityName) {
         url: url + "q=" + cityName + units + apikey,
         method: "GET"
     }).then(function(response) {
-        console.log(response);
         fillForecastDetails(response);
     });
 }
@@ -136,6 +134,7 @@ function fillCurrentWeatherDetails(response) {
     var tempTag = $("#temperature");
     var humidTag = $("#humidity");
     var windTag = $("#wSpeed");
+    setBackgroundImage(response);
     nameTag.text(response.name);
     nameTag.attr("style", "font-size: 22px; font-weight: bold;");
     dateTag.text("(" + dateString + ")");
@@ -231,3 +230,27 @@ function fillForecastDetails(response) {
     }
 }
 
+//Function to read the current weather condition and set the background image accordingly
+function setBackgroundImage(response) {
+    switch(response.weather[0].main) {
+        case "Clouds":
+            $("body").attr("style", "background: url(assets/images/cloudy.png) no-repeat center center fixed; -webkit-background-size: cover;");
+            break;
+        case "Thunderstorm":
+                $("body").attr("style", "background: url(assets/images/thunderstorm.jpg) no-repeat center center fixed; -webkit-background-size: cover;");
+            break;
+        case "Drizzle":
+        case "Rain":
+                $("body").attr("style", "background: url(assets/images/rainy_1.jpg) no-repeat center center fixed; -webkit-background-size: cover;");
+            break;
+        case "Snow":
+                $("body").attr("style", "background: url(assets/images/Snow.jpg) no-repeat center center fixed; -webkit-background-size: cover;");
+            break;
+        case "Clear":
+                $("body").attr("style", "background: url(assets/images/clear.png) no-repeat center center fixed; -webkit-background-size: cover;");
+            break;
+        default:
+                $("body").attr("style", "background: url(assets/images/foggy.png) no-repeat center center fixed; -webkit-background-size: cover;");
+            break;
+    }
+}

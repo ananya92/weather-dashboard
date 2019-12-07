@@ -1,6 +1,5 @@
 .jumbotron {
     padding: 15px 0;
-    background-blend-mode: screen;
     margin: 10px;
     border-radius: 0;
 }
@@ -31,14 +30,13 @@ button:active {
 
 body, html {
     margin: 0px;
-    height: 100%;
+    max-height: 100%;
 }
 
 #currentWeather {
     border: 1px solid #f1f1f1;
     padding: 10px;
     background-color: white;
-    background-blend-mode: screen;
     display: none;
     border-radius: 2px;
 }
