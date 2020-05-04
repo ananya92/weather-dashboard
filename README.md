@@ -26,4 +26,7 @@ so that I can plan a trip accordingly
 
 https://ananya92.github.io/weather-dashboard/
 
+## Application Screenshot
+![Project Snapshot](https://github.com/ananya92/My-Portfolio/blob/master/src/components/projects/img/pr8_2.PNG)
+
 
